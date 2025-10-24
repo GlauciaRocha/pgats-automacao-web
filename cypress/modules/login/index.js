@@ -1,12 +1,18 @@
 import { faker } from '@faker-js/faker';
 
-class Login{
-    preencherFormularioDePreCadastro(){
-        const firstName = faker.person.firstName();
-        const lastName = faker.person.lastName();
+  import {
+  getRandomNumber,
+  getRandomEmail
+} from '../../support/helpers' // Importando funções auxiliares
 
-        cy.get('input#first_name').type(firstName)
-        cy.get('[data-qa="signup-email"]').type(`getRandomEmail()`)
+
+class Login{
+    preencherFormularioDePreCadastro() {
+        const firstName = faker.person.firstName()
+        const lastName = faker.person.lastName()
+
+        cy.get('[data-qa="signup-name"]').type(`${firstName} ${lastName}`)
+        cy.get('[data-qa="signup-email"]').type(getRandomEmail())
 
         cy.contains('button', 'Signup').click()        
     }

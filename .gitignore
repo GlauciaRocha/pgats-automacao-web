@@ -5,18 +5,3 @@ cypress/videos
 cypress/screenshots
 cypress/reports
 
-Comandos do git para criar o repositório remoto no GitHub
-echo "# pgats-automacao-web" >> README.md
-
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/GlauciaRocha/pgats-automacao-web.git
-git push -u origin main
-
-depois esses passos 
-git status
-git add .
-git commit -m "mensagem do commit"       
-git push origin main

@@ -1,11 +1,13 @@
 import { faker } from '@faker-js/faker';// Importando a biblioteca faker para gerar dados aleatórios
 
 class Cadastro {
-    precherFormularioDePreCadastroCompleto() {
-    cy.get('#id_gender1').check() 
-    
-    cy.get('input#password').type('12345', { log: false} )     // log: false -> não exibe a senha no terminal
+    preencherFormularioDePreCadastroCompleto() {
 
+      
+    cy.get('#id_gender1').check()
+    
+    cy.get('input#password').type('12345', { log: false} )     
+    
     //  Para selecionar um item de um combo box -> select
     cy.get('select[data-qa=days]').select('17')
     cy.get('select[data-qa=months]').select('September')

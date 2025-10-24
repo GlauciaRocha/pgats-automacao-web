@@ -17,7 +17,7 @@ import { faker } from '@faker-js/faker';// Importando a biblioteca faker para ge
 import menu from '../modules/menu'
 import login from '../modules/login'
 import cadastro from '../modules/cadastro'
-import { use } from 'react';
+//import { use } from 'react';
 
 faker.animal.dog(); // Gera nome de cachorro aleatório
 
@@ -30,41 +30,43 @@ describe('Exercicio1', () => {
     cy.navegarParaLogin()   
   });  
 
-  it.only('Cadastrar um usuário', () => {      
-    Login.precherFormularioDePreCadastro()
-    cadastro.precherFormularioDePreCadastroCompleto()  
+  it('Cadastrar um usuário', () => {      
+    login.preencherFormularioDePreCadastro()
+    
+    cadastro.preencherFormularioDePreCadastroCompleto()  
     
     // Assert - Verificação deixar no arquivo de teste
     cy.url().should('includes', 'account_created')
     cy.contains('b', 'Account Created!')
-    cy.get('h2[data-qa="account-created"]').should('heave.text', 'ACCOUNT CREATED!')  
+    cy.get('h2[data-qa="account-created"]').should('have.text', 'Account Created!')  
 
 })
 
 //
   it('Login de Usuário com e-mail e senha corretos', () =>{  
-    Login.preencherFormularioDeLogin(userData.user, userData.password)
+    login.preencherFormularioDeLogin(userData.user, userData.password)
     
-    cy.get('i,.fa-user').parent().should('contain', userData.name)
+    //cy.get('i,.fa-user').parent().should('contain', userData.name)
+    cy.contains(userData.name).should('be.visible')
     cy.get ('a[href="/logout"]').should('be.visible')
 
     cy.get(':nth-child(10) > a')
     .should('be.visible')
-    .and('have.text', `logged in as ${userData.name}`);
+    .and('contain', userData.name)
 
-    cy.contains('b', userData.name)
-    cy.contains('Logged in as ${userData.name}').should('be.visible')
+    //cy.contains('b', userData.name)
+  cy.contains(`Logged in as ${userData.name}`).should('be.visible')
   });
  
 //
   it('Login ede Usuário com e-mail e senha incorretos', () =>{  
-   Login.preencherFormularioDeLogin(userData.user, 123456)  
+   login.preencherFormularioDeLogin(userData.user, 123456)  
 
    cy.get('.login-form > form > p').should('have.text', 'Your email or password is incorrect!')  
   });
 
   it('Logout de Usuario', () =>{
-    Login.preencherFormularioDeLogin(userData.user, userData.password)
+    login.preencherFormularioDeLogin(userData.user, userData.password)
     menu.efetuarLogout()
 
     // Assert - Verificação (mantendo arquivo de teste)
@@ -86,7 +88,7 @@ describe('Exercicio1', () => {
   });
 
   //update - imagem
-  it('Enviar um formulário de contato com upload de arquivo',() =>{
+  it.only('Enviar um formulário de contato com upload de arquivo',() =>{
     cy.get('a[href="/contact_us"]').click()
 
     cy.get('[data-qa="name"]').type(userData.name)
