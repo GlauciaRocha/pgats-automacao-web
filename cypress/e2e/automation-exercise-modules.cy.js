@@ -88,7 +88,7 @@ describe('Exercicio1', () => {
   });
 
   //update - imagem
-  it.only('6Enviar um formulário de contato com upload de arquivo',() =>{
+  it('6Enviar um formulário de contato com upload de arquivo',() =>{
     cy.get('a[href="/contact_us"]').click()
 
     cy.get('[data-qa="name"]').type(userData.name)

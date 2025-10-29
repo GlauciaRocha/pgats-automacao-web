@@ -155,7 +155,7 @@ it('10Verificar assinatura na página inicial', () => {
     cy.contains('You have been successfully subscribed!').should('be.visible');
   });
 
-  it.only('15Fazer pedido: Registrar antes de finalizar a compra', () => {         
+  it('15Fazer pedido: Registrar antes de finalizar a compra', () => {         
   cy.contains('Signup / Login').click();
 
   const nome = faker.person.firstName();
